@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana App - Advanced Workspace</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- MOBILE FRAME CONTAINER -->
+    <div class="app-container">
+
+        <!-- ================= ONBOARDING FLOW ================= -->
+        <div id="onboarding-screen" class="screen active">
+            <div class="onboarding-header">
+                <div class="app-logo-small">Ana</div>
+                <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width: 33%;"></div></div>
+            </div>
+
+            <!-- Step 1: Profile -->
+            <div class="onboarding-step active" id="step-1">
+                <h2>Welcome to Ana App!</h2>
+                <p>Create your profile to get started.</p>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="input-name" placeholder="e.g., Sarah Chen">
+                </div>
+                <div class="input-group">
+                    <label>Class / Grade</label>
+                    <input type="text" id="input-class" placeholder="e.g., Grade 8 ICSE">
+                </div>
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="number" id="input-age" placeholder="e.g., 14">
+                </div>
+            </div>
+
+            <!-- Step 2: About App -->
+            <div class="onboarding-step" id="step-2">
+                <div class="feature-badge-hero"><i class="fa-solid fa-rocket"></i></div>
+                <h2>Explore Ana App</h2>
+                <p>Your ultimate offline-ready productivity hub equipped with 10+ advanced tools, built-in Quiz engine, smart link-notes, and custom analytics.</p>
+                <ul class="feature-list-mini">
+                    <li><i class="fa-solid fa-check"></i> Task & Goal Manager</li>
+                    <li><i class="fa-solid fa-check"></i> Interactive Quiz Hub</li>
+                    <li><i class="fa-solid fa-check"></i> Advanced Link Notes</li>
+                    <li><i class="fa-solid fa-check"></i> Analytics & Power Tools</li>
+                </ul>
+            </div>
+
+            <!-- Step 3: Preferences -->
+            <div class="onboarding-step" id="step-3">
+                <div class="feature-badge-hero"><i class="fa-solid fa-sliders"></i></div>
+                <h2>Preferences</h2>
+                <p>Configure your workspace settings.</p>
+                <div class="pref-toggle">
+                    <span>Dark Glassmorphism Theme</span>
+                    <input type="checkbox" id="pref-theme" checked disabled>
+                </div>
+                <div class="pref-toggle">
+                    <span>Push Notifications</span>
+                    <input type="checkbox" id="pref-notif" checked>
+                </div>
+            </div>
+
+            <div class="onboarding-footer">
+                <button id="next-btn" class="btn-primary" onclick="nextOnboardingStep()">Continue</button>
+            </div>
+        </div>
+
+        <!-- ================= MAIN APP DASHBOARD ================= -->
+        <div id="main-app" class="screen">
+            
+            <!-- Top App Header -->
+            <header class="app-header">
+                <div class="user-greeting">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=AnaUser" alt="avatar" class="avatar">
+                    <div>
+                        <span class="welcome-text">Hello,</span>
+                        <h3 id="display-username">User</h3>
+                    </div>
+                </div>
+                <div class="header-icons">
+                    <i class="fa-regular fa-bell" onclick="alert('No new notifications')"></i>
+                </div>
+            </header>
+
+            <!-- Scrollable Pages Content Area -->
+            <div class="content-body">
+
+                <!-- PAGE 1: DASHBOARD -->
+                <div class="app-page active" id="page-dashboard">
+                    <div class="card glass-card">
+                        <h3><i class="fa-solid fa-list-check"></i> Daily Overview</h3>
+                        <div class="task-item"><input type="checkbox" checked> <span>Submit Math Project</span><span class="badge due">Done</span></div>
+                        <div class="task-item"><input type="checkbox"> <span>Finalize Java Notes</span><span class="badge progress">Pending</span></div>
+                        <div class="task-item"><input type="checkbox"> <span>Review Quiz Questions</span><span class="badge progress">Pending</span></div>
+                    </div>
+
+                    <div class="card glass-card">
+                        <h3><i class="fa-solid fa-chart-pie"></i> Quick Analytics</h3>
+                        <div class="analytics-row">
+                            <span>Productivity Score</span>
+                            <strong>88%</strong>
+                        </div>
+                        <div class="progress-bar-container"><div class="bar" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+
+                <!-- PAGE 2: TASKS & GOALS -->
+                <div class="app-page" id="page-tasks">
+                    <div class="card glass-card">
+                        <h3><i class="fa-solid fa-tasks"></i> Task Manager</h3>
+                        <div class="add-box">
+                            <input type="text" id="new-task-input" placeholder="Add a new task...">
+                            <button onclick="addTask()"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div id="task-container" class="dynamic-list">
+                            <!-- Dynamic tasks go here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 3: QUIZ HUB (Create, Save, Start, Score) -->
+                <div class="app-page" id="page-quiz">
+                    <div class="card glass-card">
+                        <h3><i class="fa-solid fa-brain"></i> Quiz Hub</h3>
+                        <div class="quiz-tabs">
+                            <button class="tab-btn active" onclick="switchQuizTab('create')">Create</button>
+                            <button class="tab-btn" onclick="switchQuizTab('play')">Play Quiz</button>
+                        </div>
+
+                        <!-- Create Quiz Section -->
+                        <div id="quiz-create-section" class="quiz-sub-section active">
+                            <input type="text" id="quiz-question" placeholder="Enter Question...">
+                            <input type="text" id="opt-1" placeholder="Option A">
+                            <input type="text" id="opt-2" placeholder="Option B">
+                            <input type="text" id="opt-3" placeholder="Option C">
+                            <select id="correct-opt">
+                                <option value="0">Correct: Option A</option>
+                                <option value="1">Correct: Option B</option>
+                                <option value="2">Correct: Option C</option>
+                            </select>
+                            <button class="btn-primary" onclick="saveQuizQuestion()">Save Question</button>
+                        </div>
+
+                        <!-- Play Quiz Section -->
+                        <div id="quiz-play-section" class="quiz-sub-section">
+                            <div id="quiz-card-container">
+                                <p id="play-q-text">No custom quizzes created yet. Add one first!</p>
+                                <div id="play-options"></div>
+                                <button id="submit-ans-btn" class="btn-primary" onclick="submitQuizAnswer()" style="display:none; margin-top: 10px;">Submit Answer</button>
+                            </div>
+                            <div id="quiz-score-board" style="margin-top: 15px; font-weight: 600;">Score: <span id="current-score">0</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 4: ADVANCED NOTES & LINK PASTER -->
+                <div class="app-page" id="page-notes">
+                    <div class="card glass-card">
+                        <h3><i class="fa-solid fa-note-sticky"></i> Advanced Notes & Links</h3>
+                        <input type="text" id="note-title" placeholder="Note Title...">
+                        <textarea id="note-content" placeholder="Write your note or paste reference link here..."></textarea>
+                        <div class="link-paste-box">
+                            <input type="url" id="note-link" placeholder="https://example.com (Paste Link)">
+                        </div>
+                        <button class="btn-primary" onclick="saveNote()">Save Note</button>
+                    </div>
+                    <div id="notes-list-container"></div>
+                </div>
+
+                <!-- PAGE 5: TOOLS & 10+ FEATURES -->
+                <div class="app-page" id="page-tools">
+                    <div class="card glass-card">
+                        <h3><i class="fa-solid fa-toolbox"></i> 10+ Power Tools</h3>
+                        <div class="tools-grid">
+                            <div class="tool-item" onclick="alert('Habit Tracker: All habits on track!')"><i class="fa-solid fa-fire"></i><span>Habits</span></div>
+                            <div class="tool-item" onclick="alert('Budget Planner: Balance $1,240')"><i class="fa-solid fa-wallet"></i><span>Budget</span></div>
+                            <div class="tool-item" onclick="alert('AI Summarizer: Ready to process notes')"><i class="fa-solid fa-wand-magic-sparkles"></i><span>AI Summary</span></div>
+                            <div class="tool-item" onclick="alert('Calculator opened')"><i class="fa-solid fa-calculator"></i><span>Calculator</span></div>
+                            <div class="tool-item" onclick="alert('Pomodoro Timer started (25 mins)')"><i class="fa-solid fa-clock"></i><span>Pomodoro</span></div>
+                            <div class="tool-item" onclick="alert('Data exported successfully to JSON')"><i class="fa-solid fa-cloud-arrow-down"></i><span>Export Data</span></div>
+                        </div>
+                    </div>
+                    <div class="card glass-card profile-summary-card">
+                        <h3><i class="fa-solid fa-user-gear"></i> User Profile Info</h3>
+                        <p><strong>Name:</strong> <span id="profile-name-val">-</span></p>
+                        <p><strong>Class:</strong> <span id="profile-class-val">-</span></p>
+                        <p><strong>Age:</strong> <span id="profile-age-val">-</span></p>
+                        <button class="btn-secondary" onclick="resetAppData()">Reset App Data</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Navigation Bar -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" onclick="switchPage('dashboard', this)"><i class="fa-solid fa-house"></i><span>Home</span></button>
+                <button class="nav-item" onclick="switchPage('tasks', this)"><i class="fa-solid fa-list-check"></i><span>Tasks</span></button>
+                <button class="nav-item" onclick="switchPage('quiz', this)"><i class="fa-solid fa-brain"></i><span>Quiz</span></button>
+                <button class="nav-item" onclick="switchPage('notes', this)"><i class="fa-solid fa-note-sticky"></i><span>Notes</span></button>
+                <button class="nav-item" onclick="switchPage('tools', this)"><i class="fa-solid fa-toolbox"></i><span>Tools</span></button>
+            </nav>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
