@@ -1,0 +1,451 @@
+:root {
+    --bg-main: #0b0f19;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --accent-primary: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.4);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #030712;
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Mobile App Frame Styling */
+.app-container {
+    width: 100%;
+    max-width: 412px;
+    height: 100vh;
+    max-height: 860px;
+    background-color: var(--bg-main);
+    border-radius: 36px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    position: relative;
+    border: 4px solid #1e293b;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 480px) {
+    .app-container {
+        height: 840px;
+    }
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Onboarding Styles */
+#onboarding-screen {
+    padding: 24px;
+    justify-content: space-between;
+}
+
+.onboarding-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.app-logo-small {
+    background: linear-gradient(135deg, var(--accent-primary), #06b6d4);
+    color: white;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-primary);
+    transition: width 0.3s ease;
+}
+
+.onboarding-step {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.onboarding-step.active {
+    display: flex;
+}
+
+.onboarding-step h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.onboarding-step p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label, .card label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+input, textarea, select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--accent-primary);
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+.feature-badge-hero {
+    width: 64px;
+    height: 64px;
+    background: rgba(99, 102, 241, 0.15);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: var(--accent-primary);
+    margin-bottom: 5px;
+}
+
+.feature-list-mini {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.feature-list-mini li {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-list-mini li i {
+    color: #10b981;
+}
+
+.pref-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), #4f46e5);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px var(--accent-glow);
+    transition: transform 0.1s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Main Dashboard UI */
+.app-header {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(11, 15, 25, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #334155;
+}
+
+.welcome-text {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.header-icons i {
+    font-size: 18px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.content-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.app-page {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.app-page.active {
+    display: flex;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.glass-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f1f5f9;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    background: rgba(255,255,255,0.02);
+    padding: 10px 12px;
+    border-radius: 10px;
+}
+
+.task-item span {
+    flex-grow: 1;
+}
+
+.badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.badge.due { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.badge.progress { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+.analytics-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.progress-bar-container {
+    height: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-container .bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), #06b6d4);
+}
+
+/* Quiz Sub Sections */
+.quiz-tabs {
+    display: flex;
+    gap: 8px;
+    background: rgba(0,0,0,0.2);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: var(--card-border);
+    color: white;
+}
+
+.quiz-sub-section {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-sub-section.active {
+    display: flex;
+}
+
+/* Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tool-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--card-border);
+    padding: 14px 10px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tool-item:hover {
+    background: rgba(255,255,255,0.06);
+    color: white;
+}
+
+.tool-item i {
+    font-size: 18px;
+    color: var(--accent-primary);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    height: 64px;
+    background: rgba(11, 15, 25, 0.9);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    cursor: pointer;
+    flex: 1;
+    transition: color 0.2s;
+}
+
+.nav-item i {
+    font-size: 16px;
+}
+
+.nav-item.active {
+    color: var(--accent-primary);
+}
+
+.add-box {
+    display: flex;
+    gap: 8px;
+}
+
+.add-box input {
+    flex-grow: 1;
+}
+
+.add-box button {
+    background: var(--accent-primary);
+    border: none;
+    color: white;
+    width: 44px;
+    border-radius: 12px;
+    cursor: pointer;
+}
